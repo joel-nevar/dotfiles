@@ -12,6 +12,7 @@ Plug 'franbach/miramare'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -35,6 +36,7 @@ set scr=15
 set mouse=a
 set splitbelow splitright
 set wildmenu
+set belloff=all
 
 inoremap jk <Esc>
 inoremap kj <Esc>
@@ -42,10 +44,6 @@ inoremap kj <Esc>
 "Replace all with R
 nnoremap R :%s//g<Left><Left>
 vnoremap R :s//g<Left><Left>
-
-"easy system clipboard copy/paste
-noremap <space>y "*y"<Esc>
-noremap <space>p "*p"<Esc>
 
 " center current search result
 nmap n nzz
@@ -76,4 +74,11 @@ let g:miramare_disable_italic_comment = 1
 let g:miramare_transparent_background = 1
 
 colorscheme miramare
+
+" coc config file
+source C:\Users\Asus\dotfiles\plugconfig\coc.vim
+
+"easy system clipboard copy/paste
+noremap <space>y "*y"<Esc>
+noremap <space>p "*p"<Esc>
 
