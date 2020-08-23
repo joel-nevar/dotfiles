@@ -1,0 +1,54 @@
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+set timeoutlen=300
+set hlsearch
+set ignorecase smart
+set incsearch
+set surround
+set showmode
+set relativenumber
+set nu
+set scr=15
+
+"Replace all with R
+nnoremap R :%s//gc<Left><Left><Left>
+
+"copy on vim to system
+clipboard+=unnamed
+
+"easy system clipboard copy/paste
+noremap <space>y "*y"
+noremap <space>Y "*Y"
+noremap <space>p "*p"
+noremap <space>P "*P"
+
+let mapleader = " "
+
+"easy window navigation
+nnoremap <a-h> gT
+nnoremap <a-l> gt
+nnoremap <leader>h <c-w>h
+nnoremap <leader>j <c-w>j
+nnoremap <leader>k <c-w>k
+nnoremap <leader>l <c-w>l
+
+" center current search result
+nmap n nzz
+nmap N Nzz
+
+" Do not auto find next
+nmap * *N
+nmap # #N
+
+" code refactoring and intelliJ stuff
+map <leader>rf :action RenameElement<CR>
+map <leader>b :action GotoDeclaration<CR>
+map <leader>u :action GotoSuperMethod<CR>
+map <leader>i :action GotoImplementation<CR>
+map <leader>rr :action Run<CR>
+
+" Faster Scrolling
+noremap <c-e> <c-e><c-e><c-e>
+noremap <c-y> <c-y><c-y><c-y>
+
