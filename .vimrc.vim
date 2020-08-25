@@ -42,8 +42,8 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 
 "Replace all with R
-nnoremap R :%s//g<Left><Left>
-vnoremap R :s//g<Left><Left>
+nnoremap R :%s/
+vnoremap R :s/
 
 " center current search result
 nmap n nzz
@@ -75,10 +75,28 @@ let g:miramare_transparent_background = 1
 
 colorscheme miramare
 
+" FZF configs
+nnoremap <Leader>pf :Files<CR>
+nnoremap <Leader>f :Rg<SPACE>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <leader>fw :Rg <C-R>=expand("<cword>")<CR><CR>
+
 " coc config file
 source C:\Users\Asus\dotfiles\plugconfig\coc.vim
+nnoremap <leader>pwr :CocSearch <C-R>=expand("<cword>")<CR><CR>
 
 "easy system clipboard copy/paste
-noremap <space>y "*y"<Esc>
-noremap <space>p "*p"<Esc>
+noremap <Leader>y "*y"<Esc>
+noremap <Leader>p "*p"<Esc>
+
+" netrw
+let g:netrw_browse_split = 2
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+nnoremap <Leader>n :Vex<CR>
+
+" Sweet Sweet FuGITive
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
 
