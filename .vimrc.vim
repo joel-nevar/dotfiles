@@ -97,6 +97,6 @@ nnoremap <Leader>n :Vex<CR>
 
 " Sweet Sweet FuGITive
 nnoremap <leader>gh :diffget //3<CR>
-nnoremap <leader>gu :diffget //2<CR>
+nnoremap <leader>gf :diffget //2<CR>
 nnoremap <leader>gs :G<CR>
 
