@@ -44,6 +44,7 @@ require('packer').startup(function()
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'tpope/vim-surround'
   use 'windwp/nvim-autopairs'
+  use 'mhartington/formatter.nvim'
 end)
 
 -- general shortcuts
@@ -116,6 +117,9 @@ g.mapleader = ' '
 map("i","jk", "<c-c>")
 map("i","kj", "<c-c>")
 
+-- Open vertical split
+map("n","<leader>v", "<cmd>:vs<CR>")
+
 -- Split movement
 map("n","<c-h>", "<c-w>h")
 map("n","<c-j>", "<c-w>j")
@@ -123,7 +127,10 @@ map("n","<c-k>", "<c-w>k")
 map("n","<c-l>", "<c-w>l")
 
 -- Shortcut to open this
-map("n","<leader>vrc", "<cmd>e C:/Users/jnevessi/Appdata/Local/nvim/tinit.lua<CR>")
+map("n","<leader>vrc", "<cmd>e C:/Users/jnevessi/Documents/dotfiles/init.lua<CR>")
+
+-- yank till end of line
+map("n", "Y", "y$")
 
 -- Make visual yanks keep cursor position
 map("v", "y", "ygv<Esc>")
@@ -165,6 +172,8 @@ require('telescope').setup {
       i = {
         ["<esc>"] = actions.close,
         ["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        --[[ ["<c-j>"] = actions.
+        ["<c-k>"] = actions. ]]
       },
     },
   },
@@ -172,12 +181,12 @@ require('telescope').setup {
 -- Add leader shortcuts
 map('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]])
 map('n', '<leader>p', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]])
-map('n', '<leader>g', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
+map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
 map('n', '<leader>e', [[<cmd>lua require('telescope.builtin').file_browser()<CR>]])
 map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
-map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
-map('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
+-- map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
 -- map('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 map('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 
@@ -261,47 +270,19 @@ local on_attach = function(_, bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
--- Enable the following language servers
+--[[ -- Enable the following language servers
 local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
-end
+end ]]
 
 require("lspconfig").tsserver.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
-
---[[ require('lspconfig').sumneko_lua.setup {
-  cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-} ]]
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -373,7 +354,10 @@ _G.s_tab_complete = function()
 end
 
 vim.api.nvim_set_keymap("i", "<c-j>", "v:lua.tab_complete()", { expr = true })
+vim.api.nvim_set_keymap("s", "<c-j>", "v:lua.tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("i", "<c-k>", "v:lua.s_tab_complete()", { expr = true })
+vim.api.nvim_set_keymap("s", "<c-k>", "v:lua.s_tab_complete()", { expr = true })
+
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
@@ -387,6 +371,28 @@ require("nvim-autopairs.completion.compe").setup({
   auto_select = true, -- auto select first item
 })
 -- End Compe related setup
+
+local prettierConfig = function()
+  return {
+    function()
+      return {
+        exe = "npx prettier",
+        args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--config .prettierrc"},
+        stdin = true
+      }
+    end
+  }
+end
+
+-- Formatter config
+require('formatter').setup({
+  filetype = {
+    javascript = prettierConfig(),
+    typescript = prettierConfig(),
+    html = prettierConfig(),
+    scss = prettierConfig(),
+  }
+})
 
 -- location icon: 
 require("lualine").setup({
@@ -438,5 +444,46 @@ require("lualine").setup({
 
 -- Highlight on yank disabled in visual mode
 cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = true}")
+
+-- Run Formatter and save
+map("n","<leader>w", "<cmd>w!<CR><cmd>FormatWrite<CR>")
+
+-- test for data replacement
+map("n","<leader>w", "<cmd>w!<CR><cmd>FormatWrite<CR>")
+
+map('n', '<leader>tt', 'S* Last Modified: <c-r>=modifiedDate<cr><esc>guiw')
+map("n","<leader>hh", "mm<cmd>g/ * Last Modified/norm 1 tt<cr>'m")
+
+-- thing to try and get ordinal numbers on date
+function day_ordinal(dayn)
+    last_digit = dayn % 10
+    if last_digit == 1 and dayn ~= 11
+        then return 'st'
+    elseif last_digit == 2 and dayn ~= 12
+        then return 'nd'
+    elseif last_digit == 3 and dayn ~= 13
+        then return 'rd'
+    else 
+        return 'th'
+    end
+end
+
+function timef(datestr,date)
+    datestr = string.gsub(datestr,"%%o",day_ordinal(date.day))
+    return os.date(datestr,os.time(datedate))
+end 
+
+date = os.date("*t",os.time())
+cTime = timef("%A, %d%o %B %Y %r",date)
+vim.g.modifiedDate = timef("%A, %d%o %B %Y %r",date)
+
+-- Format on save
+--[[ vim.api.nvim_exec([[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.js,*.ts,*.css,*.scss,*.html FormatWrite
+augroup END
+], true)
+ --]]
 
 print('init.lua loaded')
