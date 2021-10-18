@@ -119,6 +119,9 @@ map("i","kj", "<c-c>")
 
 -- Open vertical split
 map("n","<leader>v", "<cmd>:vs<CR>")
+-- Buffer Movement
+map("n","<tab>", "<cmd>bp<cr>")
+map("n","<s-tab>", "<cmd>bn<cr>")
 
 -- Split movement
 map("n","<c-h>", "<c-w>h")
@@ -178,15 +181,22 @@ require('telescope').setup {
     },
   },
 }
+
+path_display = function(opts, path)
+  local tail = require("telescope.utils").path_tail(path)
+  return string.format("%s (%s)", tail, path)
+ end
+
 -- Add leader shortcuts
-map('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]])
-map('n', '<leader>p', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]])
-map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
-map('n', '<leader>e', [[<cmd>lua require('telescope.builtin').file_browser()<CR>]])
-map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
+map('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers(path_display = path_display)<CR>]])
+map('n', '<leader>p', [[<cmd>lua require('telescope.builtin').find_files({path_display = path_display})<CR>]])
+map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').live_grep(path_display = path_display)<CR>]])
+map('n', '<leader>e', [[<cmd>lua require('telescope.builtin').file_browser(path_display = path_display)<CR>]])
+map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(path_display = path_display)<CR>]], { noremap = true, silent = true })
+map('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').grep_string(path_display = path_display)<CR>]], { noremap = true, silent = true })
+
 map('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
 -- map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
-map('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
 -- map('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 map('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 
@@ -253,7 +263,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
