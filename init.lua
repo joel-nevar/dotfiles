@@ -188,12 +188,12 @@ path_display = function(opts, path)
  end
 
 -- Add leader shortcuts
-map('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers(path_display = path_display)<CR>]])
+map('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers({path_display = path_display})<CR>]])
 map('n', '<leader>p', [[<cmd>lua require('telescope.builtin').find_files({path_display = path_display})<CR>]])
-map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').live_grep(path_display = path_display)<CR>]])
-map('n', '<leader>e', [[<cmd>lua require('telescope.builtin').file_browser(path_display = path_display)<CR>]])
-map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(path_display = path_display)<CR>]], { noremap = true, silent = true })
-map('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').grep_string(path_display = path_display)<CR>]], { noremap = true, silent = true })
+map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').live_grep({path_display = path_display})<CR>]])
+map('n', '<leader>e', [[<cmd>lua require('telescope.builtin').file_browser({path_display = path_display})<CR>]])
+map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({path_display = path_display})<CR>]], { noremap = true, silent = true })
+map('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').grep_string({path_display = path_display})<CR>]], { noremap = true, silent = true })
 
 map('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
 -- map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
