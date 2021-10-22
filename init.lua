@@ -182,6 +182,12 @@ require('telescope').setup {
   },
 }
 
+  --[[ pickers = {
+    find_files = {
+      theme = "ivy or cursor or dropdown",
+    }
+  } ]]
+
 path_display = function(opts, path)
   local tail = require("telescope.utils").path_tail(path)
   return string.format("%s (%s)", tail, path)
@@ -194,6 +200,7 @@ map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').live_grep({path_d
 map('n', '<leader>e', [[<cmd>lua require('telescope.builtin').file_browser({path_display = path_display})<CR>]])
 map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({path_display = path_display})<CR>]], { noremap = true, silent = true })
 map('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').grep_string({path_display = path_display})<CR>]], { noremap = true, silent = true })
+map('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers({path_display = path_display})<CR>]], { noremap = true, silent = true })
 
 map('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
 -- map('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
@@ -496,4 +503,10 @@ augroup END
 ], true)
  --]]
 
-print('init.lua loaded')
+package.preload['document'] = document
+
+local megaluck = { msg = 'kebab'}
+
+map('n', '<leader>n', [[<cmd>lua document.this()<CR>]])
+
+document.print('init.lua loaded')
