@@ -29,12 +29,6 @@
     "whichkey.sortOrder": "alphabetically",
     "whichkey.bindings": [
         {
-            "key": ";",
-            "name": "commands",
-            "type": "command",
-            "command": "workbench.action.showCommands"
-        },
-        {
             "key": "?",
             "name": "View All References",
             "type": "command",
@@ -42,6 +36,96 @@
             "when": "editorHasReferenceProvider"
         },
         {
+            "key": "X",
+            "name": "Show Extensions",
+            "type": "command",
+            "command": "workbench.view.extensions"
+        },
+        {
+            "key": "v",
+            "name": "Split Vertical",
+            "type": "command",
+            "command": "workbench.action.splitEditor"
+        },
+        {
+            "key": "F",
+            "name": "Toggle full screen",
+            "type": "command",
+            "command": "workbench.action.toggleFullScreen"
+        },
+        {
+            "key": "d",
+            "name": "Close active editor",
+            "type": "command",
+            "command": "workbench.action.closeActiveEditor"
+        },
+        {
+            "key": "h",
+            "name": "Move editor into left group",
+            "type": "command",
+            "command": "workbench.action.moveEditorToLeftGroup"
+        },
+        {
+            "key": "G",
+            "name": "Show source control",
+            "type": "command",
+            "command": "workbench.view.scm"
+        },
+        {
+            "key": "l",
+            "name": "Move editor into right group",
+            "type": "command",
+            "command": "workbench.action.moveEditorToRightGroup"
+        },
+        {
+            "key": "M",
+            "name": "Close other editors",
+            "type": "command",
+            "command": "workbench.action.closeOtherEditors"
+        },
+        {
+            "key": "p",
+            "name": "Peak References",
+            "type": "command",
+            "command": "editor.action.referenceSearch.trigger"
+        },
+        {
+            "key": "s",
+            "name": "Search text",
+            "type": "command",
+            "command": "workbench.action.findInFiles"
+        },
+        {
+            "key": "m",
+            "name": "Maximize editor group",
+            "type": "command",
+            "command": "workbench.action.minimizeOtherEditors"
+        },
+        {
+            "key": "=",
+            "name": "Reset editor group sizes",
+            "type": "command",
+            "command": "workbench.action.evenEditorWidths"
+        },
+        {
+            "key": "z",
+            "name": "Combine all editors",
+            "type": "command",
+            "command": "workbench.action.joinAllGroups"
+        },
+        {
+            "key": "D",
+            "name": "Close editor group",
+            "type": "command",
+            "command": "workbench.action.closeEditorsInGroup"
+        },
+        {
+            "key": "e",
+            "name": "Toggle Explorer",
+            "type": "command",
+            "command": "workbench.action.toggleSidebarVisibility"
+        },
+        /*         {
             "key": "b",
             "name": "Buffers/Editors...",
             "type": "bindings",
@@ -123,8 +207,8 @@
                     ]
                 }
             ]
-        },
-        {
+        }, 
+                 {
             "key": "d",
             "name": "Debug...",
             "type": "bindings",
@@ -220,14 +304,8 @@
                     "command": "editor.debug.action.selectionToWatch"
                 }
             ]
-        },
-        {
-            "key": "e",
-            "name": "Toggle Explorer",
-            "type": "command",
-            "command": "workbench.action.toggleSidebarVisibility"
-        },
-        {
+        }, 
+                 {
             "key": "f",
             "name": "Find & Replace...",
             "type": "bindings",
@@ -252,8 +330,8 @@
                     "command": "workbench.action.replaceInFiles"
                 }
             ]
-        },
-        {
+        }, 
+                 {
             "key": "g",
             "name": "Git...",
             "type": "bindings",
@@ -395,14 +473,14 @@
                     "command": "git.unstage"
                 }
             ]
-        },
-        {
+        }, */
+        /*         {
             "key": "h",
             "name": "Split Horizontal",
             "type": "command",
             "command": "workbench.action.splitEditorDown"
-        },
-        {
+        }, */
+        /*         {
             "key": "i",
             "name": "Insert...",
             "type": "bindings",
@@ -427,7 +505,7 @@
                 }
             ]
         },
-        {
+                 {
             "key": "l",
             "name": "LSP...",
             "type": "bindings",
@@ -560,21 +638,21 @@
                     "command": "workbench.action.showAllSymbols"
                 }
             ]
-        },
-        {
+        }, 
+                 {
             "key": "m",
             "name": "Minimap",
             "type": "command",
             "command": "editor.action.toggleMinimap"
-        },
-        {
+        }, 
+                 {
             "key": "n",
             "name": "No Highlight",
             "type": "command",
             "command": "vscode-neovim.send",
             "args": ":noh<CR>"
-        },
-        {
+        }, 
+                 {
             "key": "p",
             "name": "Peek...",
             "type": "bindings",
@@ -619,8 +697,8 @@
                     "command": "editor.action.peekTypeDefinition"
                 }
             ]
-        },
-        {
+        }, 
+                 {
             "key": "s",
             "name": "Search...",
             "type": "bindings",
@@ -638,8 +716,8 @@
                     "command": "workbench.action.findInFiles"
                 }
             ]
-        },
-        {
+        }, 
+                 {
             "key": "S",
             "name": "Show...",
             "type": "bindings",
@@ -699,8 +777,8 @@
                     "command": "workbench.debug.action.toggleRepl"
                 }
             ]
-        },
-        {
+        }, 
+                 {
             "key": "t",
             "name": "Terminal...",
             "type": "bindings",
@@ -719,8 +797,8 @@
                     "when": "!terminalFocus"
                 }
             ]
-        },
-        {
+        }, 
+         {
             "key": "U",
             "name": "UI toggles...",
             "type": "bindings",
@@ -768,14 +846,8 @@
                     "command": "workbench.action.toggleTabsVisibility"
                 }
             ]
-        },
-        {
-            "key": "v",
-            "name": "Split Vertical",
-            "type": "command",
-            "command": "workbench.action.splitEditor"
-        },
-        {
+        }, 
+                 {
             "key": "w",
             "name": "Window...",
             "type": "bindings",
@@ -853,14 +925,8 @@
                     "command": "workbench.action.closeAllGroups"
                 }
             ]
-        },
-        {
-            "key": "x",
-            "name": "Extensions",
-            "type": "command",
-            "command": "workbench.view.extensions"
-        },
-        {
+        }, 
+                 {
             "key": "y",
             "name": "Sync...",
             "type": "bindings",
@@ -878,13 +944,13 @@
                     "command": "extension.updateSettings"
                 }
             ]
-        },
-        {
+        }, 
+                 {
             "key": "z",
             "name": "Toggle zen mode",
             "type": "command",
             "command": "workbench.action.toggleZenMode"
-        }
+        } */
     ],
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
